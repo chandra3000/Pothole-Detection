@@ -26,7 +26,7 @@
         end
     end
     
-    d = a+1;
+    d = 2;                              %Intial depth in pixels
     
     for i=start:m                       %Finds maximum depth in pixels
         for j=start:n

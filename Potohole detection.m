@@ -1,25 +1,26 @@
 
-    a =1;
+    start = 1;                  %Helper variable 
+    white = 1;                  %Variable denoting white color
     img = snapshot(cam);        %Camera takes a snapshot
     I = rgb2gray(img);          %Color image is converted to grayscale
     threshold=120;              %Initialising threshold intensity
     [m,n]=size(I);              
     Ithresh=zeros(m,n);         %Initialising threshold image matrix
             
-    for i=a:m                   %Converting grayscale image to binary image
-        for j=a:n
+    for i=start:m                   %Converting grayscale image to binary image
+        for j=start:n
             if (I(i,j)>threshold)
-                Ithresh(i,j) = a;  
+                Ithresh(i,j) = white;  
             else
                 Ithresh(i,j) = 0;  
             end
         end
     end
     
-    for i=a:m                       %Storing value of containing laser
-        for j=a:n
-            if(Ithresh(i,j) == 1)
-                b = i;
+    for i=start:m                       %Storing value of pixel depth containing laser
+        for j=start:n
+            if(Ithresh(i,j) == white)
+                b = i;                  %Stores the index when first white pixel in encountered 
                 break
             end
         end
@@ -27,13 +28,12 @@
     
     d = a+1;
     
-    for i=a:m                       %Finds depth in pixels
-        for j=a:n
+    for i=start:m                       %Finds maximum depth in pixels
+        for j=start:n
             if i == b
                 continue
             else 
                 if (Ithresh(i,j) == 1)
-                    
                     e = b-i;
                     if (e>d)
                         d = e;
